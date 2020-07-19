@@ -35,7 +35,7 @@
         //$a = 3;
         //$a = -3;
         //$a = 0;
-        //$a = null;
+        //$a = NULL;
         //$a = true;
         //$a = '';
         $a = '0';
@@ -49,7 +49,7 @@
 
     //Task 4
         //$a = 3;
-        $a = null;
+        $a = NULL;
 
         var_dump(isset($a));
         if ($a == true) {
@@ -126,11 +126,11 @@
         echo '<hr />';
 
     //Task 11
-    $temp = 21;
-    echo " {$temp} Celcius <br />" ;
-    $fr = $temp * 1.8 +32;
-    echo " {$fr} Fahrenheit";
-    echo '<hr />';
+        $temp = 21;
+        echo " {$temp} Celcius <br />" ;
+        $fr = $temp * 1.8 +32;
+        echo " {$fr} Fahrenheit";
+        echo '<hr />';
 
     //Task 12
         $string = 'abcde';
@@ -157,9 +157,9 @@
         $Num1 = 6;
         $Num2 = 8;
         $Num3 = 36;
-        $Num4 = 34;
+        $Num4 = 33;
 
-        if ( $Num1 > 5 && $Num2 > 5 && $Num3 / 6 && ($Num4 % 3 != 0) ) {
+        if ( $Num1 > 5 && $Num2 > 5 && !($Num3 % 6) && $Num4 % 3) {
             echo 'yes';
         } else {
             echo 'no';
@@ -216,10 +216,10 @@
         }
         echo '<hr />';
 
-    //Task 19 неправильно выводит результат 
+    //Task 19  
         $year = 1700;
 
-        if ($year / 4 && ($year % 100 != 0) or $year / 400) {
+        if ($year / 4 && $year % 100 or !($year % 400)) {
             echo 'Високосный год';
         } else {
             echo 'Невисокосный год';
@@ -244,14 +244,18 @@
         echo "Прошло {$hours}ч";
         echo '<hr />';
 
-    //Task 22 don't know 
+    //Task 22 ???
+        /*for ($i = 0; $i <= 60) {
+            if ($i >= 0 && $i <= 3);
+        }*/
 
-    //Task 23 не знаю, как вывести сумму 
+    //Task 23 
+        $sum = 0;
 
         for ($i=20; $i <= 45; $i++) {
-            if ($i % 5) continue;
-            echo $i . ' ';
+            if ($i % 5 == 0) $sum += $i;
         }
+        echo $sum;
         echo '<hr />';
     
     //Task 24 don't know 
@@ -262,11 +266,13 @@
         }
         echo '<hr />';
 
-    //Task 26 не понимаю, как обратиться к цифрам именно на четных позициях, мое решение скорее всего неправильное
-        $numbr = '12345';
-        $numbr[1] = 0;
-        $numbr[3] = 0;
-        echo $numbr;
+    //Task 26
+        $numbr = 12345;
+        $str = (string)$numbr;
+        for ($i = 1; $i < 5; $i += 2) {
+            $str[$i] = 0;
+        } 
+        echo $str; 
         echo '<hr />';
 
     //Task 27 
@@ -275,28 +281,117 @@
     }
     echo '<hr />';
     
-    //Task 28 don't know
+    //Task 28
         $number3 = 123;
+        $number3 = (string)$number3;
+        $number3_first = $number3[0];
+        $number3_last = $number3[2];
+        $number3[2] = $number3_first;
+        $number3[0] = $number3_last;
+        echo $number3;
+        echo '<hr />';
 
-    //Task 29 пробовала, но тут немного бред выходит 
-       /* $i = 1000;
-        for (; ;$i++) {
-            $num = $i / 2;
-            if ($num >= 50) echo $num . ' ';
-            else break;
-        } */ 
+    //Task 29
+       $count = 0;
+       
+        for ($num = 1000; $num >= 50; $num /= 2) {
+            $count++;
+        }   
+        echo $count;
+        echo '<hr />';
+
+    //Task 30 
+        $num = '442158755745';
+        $count = 0;
+
+        for ($i = 0; $i <= 12; $i++) {
+            if ($num[$i] == '5') $count++ ;
+        }
+        echo $count;
+        echo '<hr />';
+
+    //Task 31
+        $a = 5;
+        $b = 8;
+        
+        for ($i = 1; $i <= $a; $i++) {
+            for ($j = 1; $j <= $b; $j++) {
+                echo 'A';
+            }
+            echo '<br />';
+        }
+        echo '<hr />'; 
+
+    //Task 32 
+        //$a = 0;
+        //$b = 2;
+        //$c = 5;
+
+    //Task 33
+        $sweets = 30;
+        $cookies = 50;
+        
+        $price_a = 0.3 * $sweets + 0.4 * $cookies;
+        echo " Цена за 300г конфет и 400г печенья равна {$price_a} руб. <br />";
+
+        $price_b = 3 * (2 * $cookies + 1.8 * $sweets);
+        echo " Цена трех покупок по 2кг печенья и 1кг 800г конфет равна {$price_b} руб.";
+        echo '<hr />';
+        
+    //Task 34 
+        $direction =  11;
+        $command = 1;
+
+        if ($direction == 14 && $command == 0 || $direction == 11 && $command == -1 || $direction == 13 && $command == 1) echo 'East';
+        if ($direction == 12 && $command == 0 || $direction == 11 && $command == 1 || $direction == 13 && $command == -1) echo 'West';
+        if ($direction == 11 && $command == 0 || $direction == 12 && $command == -1 || $direction == 14 && $command == 1) echo 'North';
+        if ($direction == 13 && $command == 0 || $direction == 12 && $command == 1 || $direction == 14 && $command == -1) echo 'South';
+
+        echo '<hr />';
+
+    //Task 35
+        $n = 4;
+
+        for ($i = 1; $i <= $n; $i++) {
+            for ($j = 1; $j <= $n; $j++){
+            echo '*';
+            }
+            echo '<br />';
+        }
+        echo '<hr />';
 
     //Task 36
         for ($i= 1001; $i <= 1025; $i= $i+3) {
             echo $i . ' ';
         }
         echo '<hr />';
+        
 
     //Task 37 
         for ($i = 100; $i > 0; $i= $i - 4) {
             echo $i . ' ';
         }
         echo '<hr />';
+
+    //Task 38 
+        $km = 10;
+
+        for ($i = 1; $i <= 10; $i++) {
+            echo "Пробежал за {$i} день {$km} км .<br />";
+            $km *= 1.1;
+        }
+
+        $day = 0;
+
+        for ($i = 1; ; $i++) {
+
+            if ($km <= 80) {
+                $km *= 1.1;
+                $day += 1;  
+            } else break;
+
+        }
+        echo " На {$day}  день ему стоит прекратить увеличивать пробег";
         
     ?>
 </body>
