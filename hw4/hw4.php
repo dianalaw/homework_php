@@ -45,7 +45,7 @@
      echo '<p><strong> Task 5 </strong></p>';
 
      $string = 'abc abc abc';
-     echo ' <strong><i> Первая буква \' b \' находится на позиции номер: </i></strong>' . strpos($string, 'b');
+     echo ' <strong><i> Первая буква \' b \' находится на позиции номер: </i></strong> ' . strpos($string, 'b');
 
      echo '<hr />';
 
@@ -56,7 +56,7 @@
 
      echo '<hr />';
 
-     //Task 7 не уверена, что правильно выполнила это задание  
+     //Task 7  
      echo '<p><strong> Task 7 </strong></p>';
 
      $string1 = 'html css php';
@@ -68,7 +68,7 @@
 
      echo '<hr />';
 
-     //Task 8 сомневаюсь, правильно ли его выполнила 
+     //Task 8 
      echo '<p><strong> Task 8 </strong></p>';
 
      $string2 = '1234567890';
@@ -127,7 +127,7 @@
      echo '<p><strong> Task 14 </strong></p>';
 
      $month = time();
-     echo 'In ' . date('F', $month) . ' there are ' . date('t', $month) . ' days';
+     echo ' In ' . date('F', $month) . ' there are ' . date('t', $month) . ' days ';
 
      echo '<hr />';
 
@@ -153,7 +153,7 @@
 
      echo '<hr />';
 
-     //Task 17 сомневаюсь, правильно ли выполнила 
+     //Task 17 
      echo '<p><strong> Task 17 </strong></p>';
 
      $password = 'blabla';
@@ -166,10 +166,8 @@
      echo '<p><strong> Task 18 </strong></p>';
 
      $string3 = '1a2b3c4b5d6e7f8g9h0';
-     for ($i = 0; $i <= 9; $i++) {
-        $arr[] = $i;
-     }
-     echo str_replace($arr, '', $string3);
+     $arr_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+     echo str_replace($arr_numbers, '', $string3);
      
      echo '<hr />';
 
@@ -243,11 +241,11 @@
 
      echo '<hr />';
 
-     //Task 27 мне кажется, что здесь немного не то сделала, что надо 
+     //Task 27  
      echo '<p><strong> Task 27 </strong></p>';
 
-     for ($i = 1; $i <= 3; $i++) {
-         $arr_random[$i] = range(1, 10);
+     for ($i = 1; $i <= 30; $i++) {
+         $arr_random[$i] = rand(1, 10);
      }
      echo '<pre>';
      print_r($arr_random);
@@ -255,17 +253,128 @@
 
      echo '<hr />';
 
-     //Task 28 тут не получается, не знаю почему 
+     //Task 28  
      echo '<p><strong> Task 28 </strong></p>';
 
      $arr_numb = [1, 2, -1, -2, 3, -3];
      print_r ($arr_numb);
+     $arr_new = [];
+     echo '<br />';
 
      for ($i = 0; $i < count($arr_numb); $i++) {
-         $arr_new = $arr_numb[$i] * (-1);     
+        array_push($arr_new, $arr_numb[$i] * (-1));     
      }
      print_r ($arr_new);
+
+     echo '<hr />';
+
+     //Task 29 
+     echo '<p><strong> Task 29 </strong></p>';
+
+     $arrNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+     $sum = 0;
+     $count = 0;
+
+     for ($i = 0; $i < count($arrNum); $i++) {
+        if ($sum < 10) {
+            $count++;
+            $sum += $arrNum[$i];
+        } else break;
+     }
+     echo $count;
+
+     echo '<hr />';
+
+     //Task 30 
+     echo '<p><strong> Task 30 </strong></p>';
+
+     $array = [[1,2,3], [4,5], [6]];
+     /*$arrPart1 = array_shift($array);
+     $arrPart2 = array_shift($array);
+     $arrPart3 = array_shift($array);
+     $arrSumAll= array_sum($arrPart1) + array_sum($arrPart2) + array_sum($arrPart3);
+     echo 'Сумма элементов массива равна ' . $arrSumAll;*/
+
+                        //2 sposob 
+     $sum = 0;
+     for ($i = 0; $i < count($array); $i++) {
+         for ($j = 0; $j < count($array[$i]); $j++) {
+            $sum += $array[$i][$j];
+         }
+     }
+     echo 'Сумма элементов массива равна ' . $sum;
     
+     echo '<hr />';
+
+     //Task 31 ???
+     echo '<p><strong> Task 31 </strong></p>';
+
+     $array= array(1, 1, 1, 2, 2, 2, 2, 3);
+
+     //Task 32 
+     echo '<p><strong> Task 32 </strong></p>';
+
+     $arrMenu = ['index' => 'Home', 'about' => 'About', 'services' => 'Services', 'catalog' => 'Catalog', 'contacts' => 'Contacts'];
+
+     echo '<ul>';
+     foreach ($arrMenu as $key => $value) {
+         echo '<li> <a href= " ' . $key . '.php ">'. $value . '</a></li>';
+     }
+     echo '</ul>';
+
+     echo '<hr />';
+
+     //Task 33 ??
+     echo '<p><strong> Task 33 </strong></p>';
+
+     echo '<hr />';
+
+     //Task 34 ??
+     echo '<p><strong> Task 34 </strong></p>';
+
+     $string = '1234567890';
+     /*for ($i = 0; $i < strlen($string) ;$i++){
+         print_r (explode(',', $string[$i], $string[$i] += $i));
+     }*/
+
+
+     echo '<hr />';
+
+     //Task 35
+     echo '<p><strong> Task 35 </strong></p>';
+     $arrayZero = [1, 2, 3, 4, 5, 0, 6, 7, 0, 9, 8, 11, 0, 23, 48, 73];
+
+     $arrayPart1 = array_slice($arrayZero,array_search ('0', $arrayZero));
+     $arrayPart2 = array_reverse($arrayPart1);
+     $arr_sum = (array_slice($arrayPart2,array_search ('0', $arrayPart2)));
+     print_r(array_sum($arr_sum));
+
+     echo '<hr />';
+
+     //Task 36 
+     echo '<p><strong> Task 36 </strong></p>';
+
+     //Task 37
+     echo '<p><strong> Task 37 </strong></p>';
+
+     $string = 'aa aba abba abbba abca abea';
+     echo preg_replace('#ab+a#', 'X', $string);
+
+     echo '<hr />';
+
+     //Task 38 тут какой-то бред, не знаю, как выделить правильно повторяющиеся элементы 
+     echo '<p><strong> Task 38 </strong></p>';
+
+     $strNumb = '332 441 550';
+     $strToArray = str_split($strNumb);
+     print_r ($strToArray);
+     echo '<br/>';
+     $arrUnique = array_unique($strToArray);
+     print_r ($arrUnique);
+     echo '<br/>';
+     implode(" ", $arrUnique);
+     echo str_replace($arrUnique, '!', $strNumb);
+
     ?>
 </body>
 </html>
