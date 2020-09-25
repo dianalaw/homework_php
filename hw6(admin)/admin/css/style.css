@@ -1,0 +1,70 @@
+h3 {
+    text-transform: uppercase;
+}
+
+.login {
+    text-align: center;
+}
+
+.logout {
+background-color: #d3b7cc;
+padding: 2%;
+}
+
+.logout a  {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #101629;
+}
+
+.logout a:hover {
+    color: #263d23;
+}
+.list {
+    padding: 2%;
+    background-color: #e2e2ee;
+    text-align: center;
+}
+
+.list li {
+    list-style-type: none;
+}
+
+.list a{
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size: 18px;
+}
+
+.upload_tools {
+    padding: 2%;
+    background-color: #c69e5d;
+}
+
+.delete_tools {
+    padding: 2%;
+    background-color: #d7d801;
+}
+
+.create_tools {
+    padding: 2%;
+    background-color: #adc3ca;
+}
+
+.rename_tools {
+    padding: 2%;
+    background-color: #b25792;
+}
+
+
+.button {
+    padding: 10px;
+    background-color: #101629;
+    color: #e2e2ee;
+    border-radius: 5px;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 5px;
+}
