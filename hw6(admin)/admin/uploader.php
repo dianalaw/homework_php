@@ -1,7 +1,7 @@
 <?php 
 
 if (!isset($_POST['submit'])) {
-    header("Location: /admin/");
+    header("Location: ./explorer.php");
     exit;
 }
 
@@ -43,7 +43,6 @@ if (!file_exists('./uploads')) {
 
 foreach ($_FILES['files']['tmp_name'] as $index => $path) {
 
-        //$files = $_FILES['files'];
         $name = $_FILES['files']['name'][$index];
         $tmp_name = $_FILES['files']['tmp_name'][$index];
         $size = $_FILES['files']['size'][$index];
@@ -68,7 +67,7 @@ foreach ($_FILES['files']['tmp_name'] as $index => $path) {
                     $fileDestination = './uploads/' . $newFileName;
 
                     move_uploaded_file($tmp_name, $fileDestination);
-                    header("Location: /admin");
+                    header("Location: ./explorer.php");
 
                 } else {
                     echo 'Your file(s) size is too big';

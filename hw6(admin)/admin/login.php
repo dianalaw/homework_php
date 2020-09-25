@@ -7,8 +7,8 @@ if (empty($_REQUEST['login']) || empty($_REQUEST['password'])) {
 
 $config = parse_ini_file('./config.ini', true); //считываем конфигурационный файл 
 
-if($config['login'] === $_REQUEST['login'] && $config['password'] === $_REQUEST['password']) {
-    setcookie('auth', 'true', time() + 86400);
+if(password_verify($_REQUEST['login'], $config['login'])===true && password_verify($_REQUEST['password'], $config['password'])===true) {
+    setcookie('auth', 'true', time() + 1800);
     
     header('Location: ./admin.php');
     exit;

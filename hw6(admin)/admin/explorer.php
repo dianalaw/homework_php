@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Admin panel</title>
 </head>
 <body>
 
-<a href="/admin/logout.php">Log out</a>
+<div class="logout"><a href="./logout.php">Log out</a></div>
 
+<!--<p><?php //$hash = password_hash("123", PASSWORD_DEFAULT); echo $hash; ?></p> 
+<p><?php //var_dump(password_verify("123", $hash)); ?></p>-->
+
+<?php //$log_hash = password_hash("admin", PASSWORD_DEFAULT); echo $log_hash; ?> 
+<?php //var_dump(password_verify("admin", $log_hash)); ?>
+
+
+<div class="list">
 <?php
 
     $dir_array = [];
@@ -51,20 +60,21 @@
             }
         }
 
-        $list .= '<li><a href = "/admin/index.php?path='. $path . '">' . $dir . '</a></li>';
+        $list .= '<li><a href = "./explorer.php?path='. $path . '">' . $dir . '</a></li>';
     }
 
     foreach ($files_array as $file) {
-        $list .= '<li><a href = "/admin/index.php?path='. $basePath . $file . '">' . $file . '</a></li>';
+        $list .= '<li><a href = "./explorer.php?path='. $basePath . $file . '">' . $file . '</a></li>';
     }
 
     if (!empty($list)) 
     echo '
     <ul>
-        <li><a href = "/admin">.</a></li>'
+        <li><a href = "./explorer.php">.</a></li>'
         . $list . 
     '</ul>'; 
 ?>
+</div>
 
 <!--Editing files -->
 
@@ -79,7 +89,7 @@
 
         echo '<form method = "POST">
         <textarea name = "filecontent" style="width:100%; height:200px;">'. $content .'</textarea>
-        <button> Save changes </button>
+        <button class="button"> Save changes </button>
         </form>';
     }
 
@@ -96,12 +106,11 @@
 
 <form action ="/admin/uploader.php" method="POST" enctype="multipart/form-data">
     <input type="file" multiple name="files[]">
-    <button name="submit">Send</button>
+    <button class="button" name="submit">Send</button>
 </form>
-
 </div>
 
-<?php echo '<hr/>'; ?>
+
 
 <!--Deleting catalogues and files--> 
 
@@ -115,20 +124,21 @@
     <input type="hidden" name="action" value="delete">
 
     Would you like to delete this?: <?php echo $deletePath . '<br/>'; ?>
-    <button>Delete</button>
+    <button class="button">Delete</button>
 
 </form>
 </div>
 
 <?php 
 if(!empty($_POST['path']) && !empty($_POST['action']) && $_POST['action']=='delete') {
-    if (is_dir($_POST['path'])) rmdir($_POST['path']);
-    else if (is_file($_POST['path'])) unlink($_POST['path']);
+    if (is_dir($_POST['path'])) {
+        rmdir($_POST['path']);
+        $file=scandir($_POST['path']);
+        if (file_exists($file)) unlink($file);
+    } else if (is_file($_POST['path'])) unlink($_POST['path']);
 
-    header("Location:/admin");
+    header("Location:./explorer.php");
 }
-
-echo '<hr/>';
 ?>
 
 <!--Creating catalogues and files--> 
@@ -142,7 +152,7 @@ echo '<hr/>';
         <input type="text" name="name" placeholder="name" /><br/>
         <input checked type="radio" name="type" value="file" /> File <br/>
         <input type="radio" name="type" value="catalogue" /> Catalogue <br/>
-        <button>Create</button>
+        <button class="button">Create</button>
     </form>
 </div>
 
@@ -161,10 +171,9 @@ echo '<hr/>';
             break;
         }
 
-        header("Location: /admin");
+        header("Location: ./explorer.php");
     }
 
-        echo '<hr/>';
 ?>
 
 <!--Renaming catalogues and files--> 
@@ -177,7 +186,7 @@ echo '<hr/>';
 
     Old name: <?php echo $renamePath; ?> <br/>
     <input type="text" name="newName" placeholder="enter new name"><br/>
-    <button name="submit">Submit</button>
+    <button name="submit" class="button" >Submit</button>
     
     </form>
 </div>
@@ -187,7 +196,7 @@ echo '<hr/>';
     $newPath=dirname($renamePath);
     if (!empty($_POST['newName']) && isset($_POST['submit'])) {
         rename($renamePath, $newPath . '/'. $_POST['newName']);
-        header("Location: /admin/index.php?path=$newPath");
+        header("Location: ./explorer.php?path=$newPath");
     }
 ?>
     
