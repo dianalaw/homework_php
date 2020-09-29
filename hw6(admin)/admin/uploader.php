@@ -1,7 +1,12 @@
 <?php 
 
+if (empty($_COOKIE['auth']) || $_COOKIE['auth'] !== "true") {
+    header('Location: ./index.php');
+    exit; 
+}
+
 if (!isset($_POST['submit'])) {
-    header("Location: ./explorer.php");
+    header("Location: /admin/explorer.php");
     exit;
 }
 
@@ -37,8 +42,8 @@ print_r($_FILES);
 echo '<pre/>';
 
 
-if (!file_exists('./uploads')) {
-    mkdir('./uploads');
+if (!file_exists('../uploads')) {
+    mkdir('../uploads');
 }
 
 foreach ($_FILES['files']['tmp_name'] as $index => $path) {
@@ -64,10 +69,10 @@ foreach ($_FILES['files']['tmp_name'] as $index => $path) {
                 if ($size < 500000) {
 
                     $newFileName = uniqid('', true) . '.' . $fileExtension;
-                    $fileDestination = './uploads/' . $newFileName;
+                    $fileDestination = '../uploads/' . $newFileName;
 
                     move_uploaded_file($tmp_name, $fileDestination);
-                    header("Location: ./explorer.php");
+                    header("Location: /admin/explorer.php");
 
                 } else {
                     echo 'Your file(s) size is too big';

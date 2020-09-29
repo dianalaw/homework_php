@@ -1,3 +1,10 @@
+<?php 
+if (empty($_COOKIE['auth']) || $_COOKIE['auth'] !== "true") {
+    header('Location: ./index.php');
+    exit; 
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,8 +117,6 @@
 </form>
 </div>
 
-
-
 <!--Deleting catalogues and files--> 
 
 <div class="delete_tools">
@@ -130,14 +135,38 @@
 </div>
 
 <?php 
-if(!empty($_POST['path']) && !empty($_POST['action']) && $_POST['action']=='delete') {
-    if (is_dir($_POST['path'])) {
-        rmdir($_POST['path']);
-        $file=scandir($_POST['path']);
-        if (file_exists($file)) unlink($file);
-    } else if (is_file($_POST['path'])) unlink($_POST['path']);
+function remove_dir($path) {
 
-    header("Location:./explorer.php");
+    if (is_file($path)) {
+        unlink($path);
+        return true;
+    }
+
+    if(is_dir($path)) {
+        $dir_list = scandir($path);
+
+        unset($dir_list[array_search('.', $dir_list)]);
+        unset($dir_list[array_search('..', $dir_list)]);
+
+        if (count($dir_list) == 0) {
+            rmdir($path);
+            return true;
+        }
+
+        foreach($dir_list as $item) {       
+           remove_dir($path . '/' . $item); 
+        }
+    }
+
+    if (file_exists($_POST['path'])) remove_dir($_POST['path']);
+    else return true;
+
+    return false;
+};
+
+if(!empty($_POST['path']) && !empty($_POST['action']) && $_POST['action']=='delete') {
+
+    if (remove_dir($_POST['path'])) header("Location:./explorer.php");
 }
 ?>
 
